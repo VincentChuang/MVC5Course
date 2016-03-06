@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using MVC5Course.Models;
 using System.Data.Entity.Validation;
 
+using System.Data.Entity;
+
 namespace MVC5Course.Controllers {
     public class EFController : Controller {
 
@@ -98,6 +100,48 @@ namespace MVC5Course.Controllers {
 
             return RedirectToAction("Index");   //回到 Index Action
         }
+
+
+        //測試 
+        //public ActionResult ViewModify() {
+        //    var v = db.vwClientOrder.FirstOrDefault();
+        //    v.firstname = "測試1";
+        //    v.lastname = "測試2";
+        //    db.SaveChanges();
+        //    return View();
+        //}
+
+
+        public ActionResult QueryPlan() {
+
+            //寫法一
+            var data = db.Product
+                .OrderBy(x => x.ProductId)
+                .AsQueryable();
+
+            //寫法二：查詢計劃，弱型別
+            //var data = db.Product
+            //    .Include("OrderLine")
+            //    .OrderBy(x => x.ProductId)
+            //    .AsQueryable();
+
+            //寫法三：查詢計劃，強型別
+            //var data = db.Product
+            //    .Include(x => x.OrderLine)
+            //    .OrderBy(x => x.ProductId)
+            //    .AsQueryable();
+
+            //寫法四：使用 SqlQuery 查詢，但導覽屬性會失效，View 的 item.OrderLine.Count() 會取得 0
+            //var data = db.Database.SqlQuery<Product>(@"
+            //    select *
+            //    from dbo.Product p
+            //    left join dbo.OrderLine o on p.ProductId=o.ProductId
+            //");
+
+            return View(data);
+        }
+
+
 
     }
 }
