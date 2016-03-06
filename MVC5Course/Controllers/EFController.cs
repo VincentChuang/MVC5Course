@@ -141,6 +141,15 @@ namespace MVC5Course.Controllers {
             return View(data);
         }
 
+        public ActionResult Edit(int id) {
+            var data = db.Product.Find(id);
+            return View(data);
+        }
+        [HttpPost]
+        public ActionResult Edit(Product p) {
+
+            return View();
+        }
 
 
     }

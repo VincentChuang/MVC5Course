@@ -126,6 +126,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="usp_Fabrics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CreateClients" Type="int" Mode="In" />
+          <Parameter Name="CreateOrders" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="FabricsModelStoreContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Occupation" EntityType="Self.Occupation" Schema="dbo" store:Type="Tables" />
@@ -302,6 +306,10 @@
             <End Role="OrderLine" EntitySet="OrderLine" />
           </AssociationSet>
           <EntitySet Name="vwClientOrder" EntityType="FabricsModel.vwClientOrder" />
+          <FunctionImport Name="usp_Fabrics" ReturnType="Collection(FabricsModel.usp_Fabrics_Result)">
+            <Parameter Name="CreateClients" Mode="In" Type="Int32" />
+            <Parameter Name="CreateOrders" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="vwClientOrder">
           <Key>
@@ -314,6 +322,10 @@
           <Property Name="ordertotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="orderstatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
+        <ComplexType Name="usp_Fabrics_Result">
+          <Property Type="String" Name="Table" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="Count" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -396,6 +408,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Fabrics" FunctionName="FabricsModel.Store.usp_Fabrics">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FabricsModel.usp_Fabrics_Result">
+                <ScalarProperty Name="Table" ColumnName="Table" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
