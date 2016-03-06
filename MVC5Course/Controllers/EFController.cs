@@ -40,18 +40,28 @@ namespace MVC5Course.Controllers {
             }
 
             var pkey = product.ProductId;   //找出 新增後 的 Primary ID
-
-            var data = db.Product.Where(x => x.ProductId == pkey).ToList();
+            //var data = db.Product.Where(x => x.ProductId == pkey).ToList();
+            var data = db.Product.OrderByDescending(x => x.ProductId).Take(5);  //取5筆記錄
+            foreach (var x in data) {
+                x.Price += 1;   //修改 Product 價格
+            }
+            db.SaveChanges();   //回寫資料庫
 
             return View(data);
         }
 
         public ActionResult Detail(int id) {
-            //var data = db.Product.Find(id);
-            var data = db.Product.FirstOrDefault(x => x.ProductId == id);
+            //var data = db.Product.Find(id);   //取單筆資料
+            var data = db.Product.FirstOrDefault(x => x.ProductId == id);   //取單筆資料
             return View(data);
         }
 
+        public ActionResult Delete(int id) {
+            var item = db.Product.Find(id);
+            db.Product.Remove(item);    //刪除資料
+            db.SaveChanges();
+            return RedirectToAction("Index");   //回到 Index Action
+        }
 
     }
 }
