@@ -11,7 +11,7 @@ namespace MVC5Course.Controllers {
 
         FabricsEntities db = new FabricsEntities();
 
-        public ActionResult Index() {
+        public ActionResult Index(bool? isActivity, string keyWord) {
 
             //新建立 Product 物件，不給 pkey，由 insert 完成後，取得 pkey
             //var product = new Product() {
@@ -40,7 +40,7 @@ namespace MVC5Course.Controllers {
             //var pkey = product.ProductId;   //找出 新增後 的 Primary ID
             ////var data = db.Product.Where(x => x.ProductId == pkey).ToList();
 
-            var data = db.Product.OrderByDescending(x => x.ProductId).Take(5);  //取5筆記錄
+            //var data = db.Product.OrderByDescending(x => x.ProductId).Take(5);  //取5筆記錄
 
             //foreach (var x in data) {
             //    x.Price += 1;   //修改 Product 價格
@@ -49,6 +49,18 @@ namespace MVC5Course.Controllers {
 
             //db.Product.find()
             //db.OrderLine.RemoveRange(product.OrderLine);
+
+            var data = db.Product.OrderByDescending(x => x.ProductId).AsQueryable();
+            if (isActivity.HasValue) {
+                data = data.Where(x => x.Active.HasValue ? x.Active == isActivity : false);
+            }
+            if (!String.IsNullOrEmpty(keyWord)) {
+                data = data.Where(x=>x.ProductName.Contains(keyWord));
+            }
+            foreach (var x in data) {
+                x.Price += 1;   //修改 Product 價格
+            }
+            SaveChanges();   //回寫資料庫
 
             return View(data);
         }
