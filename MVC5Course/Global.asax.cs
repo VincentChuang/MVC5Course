@@ -7,19 +7,17 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace MVC5Course
-{
-    public class MvcApplication : System.Web.HttpApplication
-    {
-        protected void Application_Start()
-        {
+namespace MVC5Course {
+    public class MvcApplication : System.Web.HttpApplication {
+        protected void Application_Start() {
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //移除 視圖引擎
+            //移除 視圖引擎，為了移除 aspx 視窗引擎
             ViewEngines.Engines.Clear();
             //加載 Razor 視圖引擎
             ViewEngines.Engines.Add(new RazorViewEngine());

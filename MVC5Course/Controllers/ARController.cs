@@ -25,11 +25,17 @@ namespace MVC5Course.Controllers {
                 "GoGoGo.png" ); //強迫檔案下載
         }
 
+        //輸出 Json
         public ActionResult JsonTest() {
             var db = new FabricsEntities();
-            db.Configuration.LazyLoadingEnabled = false;//為解決循環參考
-            var data = db.Product.FirstOrDefault();
+            db.Configuration.LazyLoadingEnabled = false;//為防止循環參考，由 Product 又捉 OrderLine
+            var data = db.Product.Take(3);  //抓取三筆
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult RedirectTest() {
+            //轉址到 /Product/Edit/1
+            return RedirectToAction("Edit", "Product", new { id = 1 });
         }
 
 

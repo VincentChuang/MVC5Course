@@ -6,6 +6,12 @@
 
 <h2>Index</h2>
 
+
+@if (!String.IsNullOrEmpty(Convert.ToString(TempData["ProductsEditDoneMsg"]))) {
+    <h3>@TempData["ProductsEditDoneMsg"]</h3>
+}
+
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

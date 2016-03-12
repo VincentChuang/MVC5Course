@@ -94,10 +94,12 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var db = (FabricsEntities)repo.UnitOfWork.Context;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+
+                TempData["ShowMsg"] = "商品編輯成功";
+
                 return RedirectToAction("Index");
             }
             return View(product);
