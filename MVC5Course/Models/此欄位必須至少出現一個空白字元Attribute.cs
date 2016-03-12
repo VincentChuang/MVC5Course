@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace MVC5Course.Models {
@@ -12,8 +13,12 @@ namespace MVC5Course.Models {
         }
 
         public override bool IsValid(object value) {
-            var str = (string)value;
-            return str.Contains(" ");
+
+            string s = (value == null) ? "" : value.ToString();
+            return s.Contains(" ");
+
+            //Regex rgx = new Regex(@"\d{4}-\d{6}");
+            //return rgx.IsMatch((string)value);
         }
 
     }
