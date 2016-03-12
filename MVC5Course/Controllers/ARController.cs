@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5Course.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,13 @@ namespace MVC5Course.Controllers {
         public ActionResult FileTest() {
             return File( Server.MapPath("~/Content/pic.png"),"image/png",
                 "GoGoGo.png" ); //強迫檔案下載
+        }
+
+        public ActionResult JsonTest() {
+            var db = new FabricsEntities();
+            db.Configuration.LazyLoadingEnabled = false;//為解決循環參考
+            var data = db.Product.FirstOrDefault();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
