@@ -34,30 +34,30 @@
             </th>
             <th></th>
         </tr>
-
         @{
-            var data = Model.ToArray();
+            var productsX = Model.ToArray();
         }
-
-        @for(var i=0;i<data.Count();i++) {
+        @for (var i = 0; i < productsX.Count(); i++) {
             <tr>
-                @Html.HiddenFor(x=>data[i].ProductId)
+                @Html.HiddenFor(x => productsX[i].ProductId)
                 <td>
-                    @Html.DisplayFor(modelItem => data[i].ProductName)
+                    @Html.DisplayFor(modelItem => productsX[i].ProductName)
                 </td>
                 <td>
-                    @Html.EditorFor(modelItem => data[i].Price)
+                    @Html.EditorFor(modelItem => productsX[i].Price)<br/>
+                    @Html.ValidationMessageFor(modelItem => productsX[i].Price)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => data[i].Active)
+                    @Html.DisplayFor(modelItem => productsX[i].Active)
                 </td>
                 <td>
-                    @Html.EditorFor(modelItem => data[i].Stock)
+                    @Html.EditorFor(modelItem => productsX[i].Stock)<br />
+                    @Html.ValidationMessageFor(modelItem => productsX[i].Stock)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=data[i].ProductId }) |
-                    @Html.ActionLink("Details", "Details", new { id=data[i].ProductId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=data[i].ProductId })
+                    @Html.ActionLink("Edit", "Edit", new { id = productsX[i].ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { id = productsX[i].ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = productsX[i].ProductId })
                 </td>
             </tr>
         }
