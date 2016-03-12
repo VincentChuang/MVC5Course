@@ -13,12 +13,8 @@ namespace MVC5Course.Models {
         }
 
         public override bool IsValid(object value) {
-
             string s = (value == null) ? "" : value.ToString();
             return s.Contains(" ");
-
-            //Regex rgx = new Regex(@"\d{4}-\d{6}");
-            //return rgx.IsMatch((string)value);
         }
 
     }

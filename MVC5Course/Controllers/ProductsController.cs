@@ -10,10 +10,10 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();
-        private ProductRepository repo = RepositoryHelper.GetProductRepository();
+        //private ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Products
         public ActionResult Index()
@@ -57,8 +57,10 @@ namespace MVC5Course.Controllers
             {
                 repo.Add(product);
                 repo.UnitOfWork.Commit();
+
                 //db.Product.Add(product);
                 //db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
