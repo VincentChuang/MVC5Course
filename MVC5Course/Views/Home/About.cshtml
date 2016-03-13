@@ -1,10 +1,26 @@
 ﻿@{
     ViewBag.Title = "About";
+
+    
+    if (IsAjax) {       //此三行，若是 Ajax 呼叫，則不代入 Layout
+        Layout = "";    //此三行，若是 Ajax 呼叫，則不代入 Layout
+    }                   //此三行，若是 Ajax 呼叫，則不代入 Layout
+    
 }
 
 @section breadcrumb{
     <li><a href="/Home/About">About</a></li>
 }
+
+<!--
+    練習 @@Html.ActionLink 與 @@Url.Action 的使用方式 ( 注意 @@class 與 data-* 屬性的用法 )
+-->
+
+@Html.ActionLink(" ", "Index", null, new { @class="btn btn-primary",data_names="Will" })
+
+<a href="@Url.Action("Index")" class="btn btn-primary" data-name="Will"></a>
+
+
 
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
