@@ -394,6 +394,8 @@
     <Content Include="Views\AR\Index.cshtml" />
     <Content Include="Views\MB\Index.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Shared\Error_1.cshtml" />
+    <Content Include="Views\Shared\Error_2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

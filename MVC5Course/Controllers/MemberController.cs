@@ -21,7 +21,8 @@ namespace MVC5Course.Controllers
         public ActionResult Login(LoginViewModel login) {
             //驗證成功
             if (CheckLogin(login.Email, login.Password)) {
-                FormsAuthentication.RedirectFromLoginPage(login.Email, false);
+                //FormsAuthentication.RedirectFromLoginPage(login.Email, false);
+                FormsAuthentication.RedirectFromLoginPage(login.Email, true);   //搭配「記住我」功能
                 return RedirectToAction("Index","Home");
             }
 

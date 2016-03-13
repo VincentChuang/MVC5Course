@@ -29,5 +29,23 @@ namespace MVC5Course.Controllers {
             return View();
         }
 
+
+
+
+        [HandleError(ExceptionType = typeof(ArgumentException), View = "Error_1")]
+        [HandleError(ExceptionType = typeof(NullReferenceException), View = "Error_2")]
+        public ActionResult ErrorTest(string e) {
+            if (e == "1") {
+                throw new Exception("Error 1");
+            }
+            if (e == "2") {
+                throw new ArgumentException("Error 2");
+            }
+            return Content("No Error");
+        }
+
+
+
+
     }
 }
