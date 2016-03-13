@@ -1,4 +1,5 @@
-﻿using MVC5Course.Models;
+﻿using Microsoft.Web.Mvc;
+using MVC5Course.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace MVC5Course.Controllers {
         }
 
         //輸出 Json
+        [AjaxOnly]  //需安裝 MVC Future 套件，主要判斷 XMLHttpRequest header
         public ActionResult JsonTest() {
             var db = new FabricsEntities();
             db.Configuration.LazyLoadingEnabled = false;//為防止循環參考，由 Product 又捉 OrderLine

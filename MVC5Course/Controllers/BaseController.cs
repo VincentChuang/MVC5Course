@@ -12,7 +12,7 @@ namespace MVC5Course.Controllers {
         //private FabricsEntities db = new FabricsEntities();
         protected ProductRepository repo = RepositoryHelper.GetProductRepository();
 
-        //共用 debug
+        //讓每個 extends BaseController 都共用 debug
         public ActionResult Debug() {
             return Content("DEBUG");
         }

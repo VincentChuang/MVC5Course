@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace MVC5Course.Models {
+
     public class Products批次更新ViewModel {
 
         [Required]
@@ -19,4 +20,5 @@ namespace MVC5Course.Models {
         public Nullable<decimal> Stock { get; set; }
 
     }
+
 }
