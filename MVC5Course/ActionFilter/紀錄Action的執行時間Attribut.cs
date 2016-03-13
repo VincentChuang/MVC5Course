@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers {
 
-    public class 紀錄Action的執行時間AttributAttribute : ActionFilterAttribute {
+    public class 紀錄Action的執行時間Attribute : ActionFilterAttribute {
 
         //在執行 Action 前
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
