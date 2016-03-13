@@ -13,15 +13,12 @@
         <dt>
             @Html.DisplayNameFor(model => model.ProductName)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ProductName)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Price)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Price)
         </dd>
@@ -48,3 +45,20 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+@*
+    //40 練習 @Html.Action 與 @Html.Partial 的使用方式
+    //部份頁面
+    @Html.Action("Index", "OrderLine", new { ProductId = Model.ProductId })
+*@
+
+
+@*
+    //40 練習 @Html.Action 與 @Html.Partial 的使用方式
+    //部份頁面
+    @Html.Partial("../OrderLine/Index", Model.OrderLine)
+*@
+
+
+

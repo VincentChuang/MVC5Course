@@ -182,6 +182,7 @@
     <Compile Include="Controllers\MBController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\NewLayoutController.cs" />
+    <Compile Include="Controllers\OrderLineController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="ActionFilter\共用的ViewBag資料共享於部分HomeController動作方法Attribute.cs" />
@@ -572,6 +573,11 @@
     <Content Include="Views\Home\RazorTest.cshtml" />
     <Content Include="Views\NewLayout\Index.cshtml" />
     <Content Include="Views\NewLayout\_NewLayoutPage.cshtml" />
+    <Content Include="Views\OrderLine\Create.cshtml" />
+    <Content Include="Views\OrderLine\Delete.cshtml" />
+    <Content Include="Views\OrderLine\Details.cshtml" />
+    <Content Include="Views\OrderLine\Edit.cshtml" />
+    <Content Include="Views\OrderLine\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
