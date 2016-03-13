@@ -45,6 +45,10 @@ namespace MVC5Course.Controllers {
         }
 
 
+        public ActionResult RazorTest() {
+            int[] data = new int[] { 1, 2, 3, 4, 5 };
+            return PartialView(data);
+        }
 
 
     }
