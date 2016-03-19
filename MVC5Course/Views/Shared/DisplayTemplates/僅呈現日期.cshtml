@@ -1,0 +1,9 @@
+﻿@model DateTime?
+
+@{
+    if (Model != null) {
+        DateTime dtt = (DateTime)Model;
+        string s = dtt.ToString("yyyy-MM-dd");
+        <text>@(s)</text>
+    }
+}
