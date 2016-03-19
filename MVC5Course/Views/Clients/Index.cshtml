@@ -20,8 +20,6 @@
     @Ajax.ActionLink("Create New", "Create", new AjaxOptions() { UpdateTargetId = "Details" })
 </p>
 
-@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p }))
-
 <table class="table">
     <tr>
         <th>
@@ -42,7 +40,6 @@
         <th>
             @Html.DisplayNameFor(model => model.CreditRating)
         </th>
-
 <!--
         <th>
             @Html.DisplayNameFor(model => model.XCode)
@@ -140,8 +137,8 @@
 
 </table>
 
-@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p }))
+@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p })
+    ,PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#main")     //此行可變為 ajax
+)
 
 <div id="Details"></div>
-
-

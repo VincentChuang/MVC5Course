@@ -1,9 +1,11 @@
 ﻿@model String
 
-@if (Model.Trim() == "M") {
-    @:男性
-} else if (Model.Trim() == "F") {
-    @:女性
-} else {
-    @:不確定
+@if (Model != null) {
+    if (Model.Trim() == "M") {
+        @:男性
+    } else if (Model.Trim() == "F") {
+        @:女性
+    } else {
+        @:不確定
+    }
 }

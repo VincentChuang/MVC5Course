@@ -21,7 +21,7 @@ namespace MVC5Course.Controllers {
                 .Include(c => c.Occupation)
                 .OrderBy(x => x.ClientId);
             var data = client
-                .ToPagedList(pageNo, 10);
+                .ToPagedList(pageNo, 10);   //傳入 頁數，每頁幾筆
             return View("Index", data);
         }
 
