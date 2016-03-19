@@ -19,8 +19,10 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-
-@Html.DropDownList("isActive","--是否有效--")
+@using (Html.BeginForm("Index", "Products",FormMethod.Get)) {
+    @Html.DropDownList("isActive", null, "--是否有效--", new { onchange="this.form.submit();" })
+    @Html.TextBox("keyword", null, new { onchange="this.form.submit();" })
+}
 
 
 @using (Html.BeginForm()) {
@@ -96,7 +98,9 @@
 {
     if (ViewBag.type == "Details")
     {
-        @Html.Partial("Details", ViewData["SelectedProductItem"])
+        if (ViewData["SelectedProductItem"] != null) {
+            @Html.Partial("Details", ViewData["SelectedProductItem"])
+        }
     }
     else
     {
