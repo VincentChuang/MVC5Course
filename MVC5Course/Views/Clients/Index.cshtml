@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<MVC5Course.Models.Client>
 
 @{
+    if (IsAjax) {
+        Layout = null;
+    }
     ViewBag.Title = "Index";
 }
 
@@ -30,7 +33,7 @@
             @Html.DisplayNameFor(model => model.CreditRating)
         </th>
 
-        <!--
+<!--
         <th>
             @Html.DisplayNameFor(model => model.XCode)
         </th>
@@ -61,7 +64,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Occupation.OccupationName)
         </th>
-        -->
+-->
         <th></th>
     </tr>
 
@@ -85,7 +88,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.CreditRating)
         </td>
-        <!--
+<!--
         <td>
             @Html.DisplayFor(modelItem => item.XCode)
         </td>
