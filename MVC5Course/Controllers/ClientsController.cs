@@ -8,15 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
 
+using PagedList;
+
 namespace MVC5Course.Controllers {
     public class ClientsController : Controller {
 
         private FabricsEntities db = new FabricsEntities();
 
         // GET: Clients
-        public ActionResult Index() {
-            var client = db.Client.Include(c => c.Occupation);
-            return View(client.Take(5).ToList());
+        public ActionResult Index(int pageNo=1) {
+            var client = db.Client
+                .Include(c => c.Occupation)
+                .OrderBy(x => x.ClientId);
+            var data = client
+                .ToPagedList(pageNo, 10);
+            return View("Index", data);
         }
 
         // GET: Clients/Details/5
@@ -76,12 +82,15 @@ namespace MVC5Course.Controllers {
                 db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
                 
+                //原程式碼
                 //return RedirectToAction("Index");
 
                 //原返回 redirect 轉址，
                 //後改為 輸出 Index View 畫面
                 //以符合 Ajax
                 return View("Index", db.Client.Include(c => c.Occupation).Take(5));
+                //或此種寫法
+                //return this.Index();
 
             }
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
