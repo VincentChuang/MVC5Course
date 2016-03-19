@@ -16,11 +16,36 @@ namespace MVC5Course.Controllers
         //private ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int? ProductId, string type, bool? isActive)
         {
-            var data = repo.All().Take(5);
+            //取回所有資料，傳入 true
+            var data = repo.All(true).Take(5);
+
+            #region 實做下拉選單
+
+            if (isActive.HasValue && isActive == true) {
+                data = data.Where(x => x.isDelete.HasValue && x.Active.HasValue == isActive);
+            }
+
+            var items = new List<SelectListItem>();
+            items.Add(new SelectListItem() { Value = "true", Text = "有效" });
+            items.Add(new SelectListItem() { Value = "false", Text = "無效" });
+            ViewData["isActive"] = new SelectList(items, "Value", "Text");
+
+            #endregion
+
+            //if (id != null) {
+            //    FabricsEntities db = new FabricsEntities();
+            //    List<OrderLine> list = db.OrderLine.Where(x => x.ProductId == id).Take(10).ToList();
+            //    ViewBag.ExtOL = list;
+            //}
+
+            ViewBag.type = type;
+            if (ProductId.HasValue) {
+                ViewBag.SelectedProductId = ProductId.Value;
+            }
+
             return View(data);
-            //return View(db.Product.ToList());
         }
 
         [HttpPost]
@@ -171,5 +196,17 @@ namespace MVC5Course.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        public ActionResult GetOrderLines(int id) {
+
+            FabricsEntities db = new FabricsEntities();
+            List<OrderLine> list = db.OrderLine.Where(x => x.ProductId == id).ToList();
+
+            return PartialView();
+        }
+
+
+
     }
 }

@@ -20,6 +20,9 @@
 </p>
 
 
+@Html.DropDownList("isActive","--是否有效--")
+
+
 @using (Html.BeginForm()) {
 
     <table class="table">
@@ -60,8 +63,9 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = productsX[i].ProductId }) |
-                    @Html.ActionLink("Details", "Details", new { id = productsX[i].ProductId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = productsX[i].ProductId })
+                    @Html.ActionLink("捉Detail", "Index", new { type = "Details", ProductId = productsX[i].ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = productsX[i].ProductId }) |
+                    @Html.ActionLink("查詢OL", "Index", new { type = "OrderLines", ProductId = productsX[i].ProductId })
                 </td>
             </tr>
         }
@@ -70,3 +74,33 @@
     <button class="btn btn-primary">批次更新</button>
 
 }
+
+@*
+    <table border="1"  >
+        @if (ViewBag.ExtOL != null) {
+            List<OrderLine> list = (List<OrderLine>)ViewBag.ExtOL;
+            foreach (var x in list) {
+                <tr>
+                    <td> @x.ProductId </td>
+                    <td> @x.Qty </td>
+                    <td> @x.LineNumber </td>
+                </tr>
+            }
+        }
+    </table>
+*@
+
+<hr />
+
+@if (ViewBag.SelectedProductId != null)
+{
+    if (ViewBag.type == "Details")
+    {
+        @Html.Partial("Details", ViewData["SelectedProductItem"])
+    }
+    else
+    {
+        @Html.Action("Index", "OrderLine", new { ProductId = ViewBag.SelectedProductId })
+    }
+}
+

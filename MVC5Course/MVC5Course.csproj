@@ -578,6 +578,7 @@
     <Content Include="Views\OrderLine\Details.cshtml" />
     <Content Include="Views\OrderLine\Edit.cshtml" />
     <Content Include="Views\OrderLine\Index.cshtml" />
+    <Content Include="Views\Products\GetOrderLines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
