@@ -23,8 +23,16 @@ namespace MVC5Course.Controllers {
         }
 
         // GET: api/ProductsApi
-        public IQueryable<Product> GetProduct() {
-            return db.Product;
+        //public IQueryable<Product> GetProduct() {
+        //56 建立一個 ViewModel 自訂輸出不同欄位屬性的 JSON 格式
+        public IQueryable<ProductApiViewModel> GetProduct() {
+            //return db.Product;
+            //56 建立一個 ViewModel 自訂輸出不同欄位屬性的 JSON 格式
+            return from p in db.Product
+                   select new ProductApiViewModel() {
+                       id = p.ProductId,
+                       name = p.ProductName
+                   };
         }
 
         // GET: api/ProductsApi/5

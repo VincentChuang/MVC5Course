@@ -278,6 +278,7 @@
     <Compile Include="Models\Product.Partial.cs">
       <DependentUpon>EFGeneratePartialClass.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductApiViewModel.cs" />
     <Compile Include="Models\ProductRepository.cs">
       <DependentUpon>IRepository.EF6.tt</DependentUpon>
     </Compile>
