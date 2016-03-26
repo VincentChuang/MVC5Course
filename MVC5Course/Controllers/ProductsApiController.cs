@@ -10,10 +10,9 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using MVC5Course.Models;
 
-namespace MVC5Course.Controllers
-{
-    public class ProductsApiController : ApiController
-    {
+namespace MVC5Course.Controllers {
+    public class ProductsApiController : ApiController {
+
         private FabricsEntities db = new FabricsEntities();
 
         public ProductsApiController() {
@@ -22,18 +21,15 @@ namespace MVC5Course.Controllers
         }
 
         // GET: api/ProductsApi
-        public IQueryable<Product> GetProduct()
-        {
+        public IQueryable<Product> GetProduct() {
             return db.Product;
         }
 
         // GET: api/ProductsApi/5
         [ResponseType(typeof(Product))]
-        public IHttpActionResult GetProduct(int id)
-        {
+        public IHttpActionResult GetProduct(int id) {
             Product product = db.Product.Find(id);
-            if (product == null)
-            {
+            if (product == null) {
                 return NotFound();
             }
 
@@ -42,32 +38,23 @@ namespace MVC5Course.Controllers
 
         // PUT: api/ProductsApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutProduct(int id, Product product)
-        {
-            if (!ModelState.IsValid)
-            {
+        public IHttpActionResult PutProduct(int id, Product product) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            if (id != product.ProductId)
-            {
+            if (id != product.ProductId) {
                 return BadRequest();
             }
 
             db.Entry(product).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!ProductExists(id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -77,10 +64,8 @@ namespace MVC5Course.Controllers
 
         // POST: api/ProductsApi
         [ResponseType(typeof(Product))]
-        public IHttpActionResult PostProduct(Product product)
-        {
-            if (!ModelState.IsValid)
-            {
+        public IHttpActionResult PostProduct(Product product) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
@@ -92,11 +77,9 @@ namespace MVC5Course.Controllers
 
         // DELETE: api/ProductsApi/5
         [ResponseType(typeof(Product))]
-        public IHttpActionResult DeleteProduct(int id)
-        {
+        public IHttpActionResult DeleteProduct(int id) {
             Product product = db.Product.Find(id);
-            if (product == null)
-            {
+            if (product == null) {
                 return NotFound();
             }
 
@@ -106,18 +89,18 @@ namespace MVC5Course.Controllers
             return Ok(product);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool ProductExists(int id)
-        {
-            return db.Product.Count(e => e.ProductId == id) > 0;
+        private bool ProductExists(int id) {
+            //下述寫法建議改寫為 Any
+            //return db.Product.Count(e => e.ProductId == id) > 0;
+            return db.Product.Any(e => e.ProductId == id);
         }
+
     }
 }

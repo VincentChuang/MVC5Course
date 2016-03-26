@@ -22,6 +22,9 @@ namespace MVC5Course {
             //加載 Razor 視圖引擎
             ViewEngines.Engines.Add(new RazorViewEngine());
 
+            //54 設定 ASP.NET Web APi 強制回應 JSON 格式
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
         }
     }
 }
