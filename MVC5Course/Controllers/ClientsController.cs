@@ -81,14 +81,18 @@ namespace MVC5Course.Controllers {
             if (ModelState.IsValid) {
                 db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
+
+//TempData["EditResult"] = "您修改\r\n 第" + client.ClientId + "筆\r\n 修改成功";
+//ViewBag.EditResult = "您修改\r\n 第" + client.ClientId + "筆\r\n 修改成功";
+                TempData["Msg"] = "更新資料成功\r\n您剛才更新的是編號 " + client.ClientId + " 的資料";
                 
                 //原程式碼
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
 
                 //原返回 redirect 轉址，
                 //後改為 輸出 Index View 畫面
                 //以符合 Ajax
-                return View("Index", db.Client.Include(c => c.Occupation).Take(5));
+                //`return View("Index", db.Client.Include(c => c.Occupation).Take(5));
                 //或此種寫法
                 //return this.Index();
 

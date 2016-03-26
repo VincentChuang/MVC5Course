@@ -190,6 +190,7 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\NewLayoutController.cs" />
     <Compile Include="Controllers\OrderLineController.cs" />
+    <Compile Include="Controllers\ProductsApiController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="ActionFilter\共用的ViewBag資料共享於部分HomeController動作方法Attribute.cs" />
