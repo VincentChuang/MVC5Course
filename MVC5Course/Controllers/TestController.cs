@@ -26,5 +26,27 @@ namespace MVC5Course.Controllers
         }
 
 
+        public ActionResult MyOrder() {
+            //58 利用 EnumHelper 輸出 enum 型別的屬性
+            ViewData.Model = new MyOrderVM() {
+                Id = 1,
+                Name = "Will",
+                Status = Status.C
+            };
+
+            return View();
+        }
+        public ActionResult MyOrderView() {
+            ViewData.Model = new MyOrderVM() {
+                Id = 1,
+                Name = "Will",
+                Status = Status.C
+            };
+
+            return View();
+        }
+
+
+
     }
 }
