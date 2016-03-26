@@ -17,7 +17,9 @@ namespace MVC5Course.Controllers {
 
         public ProductsApiController() {
             //53 練習建立一個 ProductsApi 控制器 ( 要解決循環參考問題 )
-            db.Configuration.LazyLoadingEnabled = false;
+            //db.Configuration.LazyLoadingEnabled = false;
+
+            //55 設定 [JsonIgore] 在導覽屬性上，並重新啟用延遲載入特性 ( LazyLoadingEnabled = true )
         }
 
         // GET: api/ProductsApi

@@ -9,6 +9,7 @@
 
 namespace MVC5Course.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -19,8 +20,12 @@ namespace MVC5Course.Models
         public int ProductId { get; set; }
         public decimal Qty { get; set; }
         public decimal LineTotal { get; set; }
-    
+
+        //55 設定 [JsonIgore] 在導覽屬性上，並重新啟用延遲載入特性 ( LazyLoadingEnabled = true )
+        [JsonIgnore]
         public virtual Order Order { get; set; }
+        //55 設定 [JsonIgore] 在導覽屬性上，並重新啟用延遲載入特性 ( LazyLoadingEnabled = true )
+        [JsonIgnore]
         public virtual Product Product { get; set; }
     }
 }

@@ -9,6 +9,7 @@
 
 namespace MVC5Course.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -25,7 +26,9 @@ namespace MVC5Course.Models
         public Nullable<bool> Active { get; set; }
         public Nullable<decimal> Stock { get; set; }
         public Nullable<bool> isDelete { get; set; }
-    
+
+        //55 設定 [JsonIgore] 在導覽屬性上，並重新啟用延遲載入特性 ( LazyLoadingEnabled = true )
+        //[JsonIgnore]
         public virtual ICollection<OrderLine> OrderLine { get; set; }
     }
 }
