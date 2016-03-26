@@ -2,6 +2,15 @@
 <#@ output extension=".cshtml" #>
 <#@ include file="Imports.include.t4" #>
 @model IEnumerable<#= "<" + ViewDataTypeName + ">" #>
+
+
+@using PagedList
+@using PagedList.Mvc
+@{
+    var data = Model as IPagedList;
+}
+
+
 <#
 // The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
 if(IsPartialView) {
@@ -12,7 +21,20 @@ if(IsPartialView) {
 #>
 
 @{
+
+    if (IsAjax)
+    {
+        Layout = "";
+    }
+
     ViewBag.Title = "<#= ViewName#>";
+
+    var CommonAjaxOptions = new AjaxOptions() {
+        UpdateTargetId = "Details",
+        LoadingElementId = "loading",
+        OnSuccess = "ajaxSuccess"
+    };
+
 <#
 if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
@@ -20,6 +42,21 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 <#
 }
 #>
+}
+
+@if (TempData["Msg"] != null)
+{
+    <script>
+        alert('@Ajax.JavaScriptStringEncode(Convert.ToString(TempData["Msg"]))');
+    </script>
+}
+
+@section Scripts {
+    <script>
+        function ajaxSuccess() {
+            console.log('Succeed');
+        }
+    </script>
 }
 
 <h2><#= ViewName#></h2>
@@ -103,9 +140,18 @@ if (pkName != null) {
 } else {
 #>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
+                @Ajax.ActionLink("Edit", "Edit", new
+                   {
+                       id = item.<#=pkName#>,
+                       pageNo = (int)ViewBag.pageNo
+                   },
+                CommonAjaxOptions) |
+                @Ajax.ActionLink("Details", "Details", new { id = item.<#=pkName#> },
+                CommonAjaxOptions) |
+                @Ajax.ActionLink("Delete", "Delete", new { id = item.<#=pkName#> },
+                CommonAjaxOptions)
+
         </td>
 <#
 }
@@ -114,6 +160,13 @@ if (pkName != null) {
 }
 
 </table>
+
+
+@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#main"))
+
+<div id="Details"></div>
+
+
 <#
 // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
 #>
